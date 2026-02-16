@@ -4,31 +4,50 @@
 <title>Result</title>
 <link rel="stylesheet" href="/static/style.css">
 </head>
-
 <body>
 
 <div class="card">
 
-<h2>Analysis Result</h2>
+<h2>Fraud Analysis Result</h2>
 
-<p><b>Message:</b></p>
-<p>{{ text }}</p>
+<p><b>Message:</b> {{ message }}</p>
+<p><b>Risk Score:</b> {{ score }}</p>
+<p><b>Status:</b> {{ level }}</p>
+<p><b>AI Probability:</b> {{ ai_prob }}%</p>
 
-<p><b>Risk Level:</b> {{ level }}</p>
+<h3>Reasons</h3>
+<ul>
+{% for r in reasons %}
+<li>{{ r }}</li>
+{% endfor %}
+</ul>
 
-<div class="meter">
-  <div style="width: {{ score }}%"></div>
-</div>
+<h3>Detected Keywords</h3>
+<ul>
+{% for w in words %}
+<li>{{ w }}</li>
+{% endfor %}
+</ul>
 
-<p>Risk Score: {{ score }}%</p>
+<h3>Credentials Found</h3>
+<ul>
+{% for c in creds %}
+<li>{{ c }}</li>
+{% endfor %}
+</ul>
 
-<a href="/">
-<button>Check Another</button>
-</a>
+<h3>URL Alerts</h3>
+<ul>
+{% for u in urls %}
+<li>{{ u }}</li>
+{% endfor %}
+</ul>
+
+<br>
+<a href="/">⬅ Back</a>
 
 </div>
 
 </body>
 </html>
 
-</html>
