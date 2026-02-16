@@ -1,50 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Result</title>
-<link rel="stylesheet" href="/static/style.css">
+    <title>Fraud Result</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
 
 <div class="card">
 
-<h2>Fraud Analysis Result</h2>
+    <h2>Fraud Analysis Result</h2>
 
-<p><b>Message:</b> {{ message }}</p>
-<p><b>Risk Score:</b> {{ score }}</p>
-<p><b>Status:</b> {{ level }}</p>
-<p><b>AI Probability:</b> {{ ai_prob }}%</p>
+    <p><b>Message:</b></p>
+    <p>{{ message }}</p>
 
-<h3>Reasons</h3>
-<ul>
-{% for r in reasons %}
-<li>{{ r }}</li>
-{% endfor %}
-</ul>
+    <hr>
 
-<h3>Detected Keywords</h3>
-<ul>
-{% for w in words %}
-<li>{{ w }}</li>
-{% endfor %}
-</ul>
+    <p><b>Risk Score:</b> {{ score }}</p>
+    <p><b>Status:</b> {{ level }}</p>
+    <p><b>AI Probability:</b> {{ ai_prob }}%</p>
 
-<h3>Credentials Found</h3>
-<ul>
-{% for c in creds %}
-<li>{{ c }}</li>
-{% endfor %}
-</ul>
+    <h3>Reasons Detected</h3>
+    <ul>
+        {% for r in reasons %}
+            <li>{{ r }}</li>
+        {% endfor %}
+    </ul>
 
-<h3>URL Alerts</h3>
-<ul>
-{% for u in urls %}
-<li>{{ u }}</li>
-{% endfor %}
-</ul>
+    <h3>Suspicious Words</h3>
+    <ul>
+        {% for w in words %}
+            <li>{{ w }}</li>
+        {% endfor %}
+    </ul>
 
-<br>
-<a href="/">⬅ Back</a>
+    <h3>Credentials Found</h3>
+    <ul>
+        {% for c in creds %}
+            <li>{{ c }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>URL Alerts</h3>
+    <ul>
+        {% for u in urls %}
+            <li>{{ u }}</li>
+        {% endfor %}
+    </ul>
+
+    <br><br>
+
+    <a href="/">
+        <button>⬅ Analyze Another Message</button>
+    </a>
 
 </div>
 
