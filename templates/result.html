@@ -1,53 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>Result</title>
 <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
 
 <div class="card">
 
-<h2>Scan Result</h2>
+<h2>Analysis Result</h2>
 
-<p><b>Message:</b> {{text}}</p>
+<p><b>Message:</b></p>
+<p>{{ text }}</p>
+
+<p><b>Risk Level:</b> {{ level }}</p>
 
 <div class="meter">
-<div style="width:{{score}}%"></div>
+  <div style="width: {{ score }}%"></div>
 </div>
 
-<h3>Risk Score: {{score}} / 100</h3>
-<h3>Risk Level: {{level}}</h3>
-<h3>AI Scam Probability: {{ai_prob}}%</h3>
+<p>Risk Score: {{ score }}%</p>
 
-{% if reasons %}
-<h4>Reasons:</h4>
-<ul>
-{% for r in reasons %}
-<li>{{r}}</li>
-{% endfor %}
-</ul>
-{% endif %}
-
-{% if urls %}
-<h4>URL Alerts:</h4>
-<ul>
-{% for u in urls %}
-<li>{{u}}</li>
-{% endfor %}
-</ul>
-{% endif %}
-
-{% if creds %}
-<h4>Credential Exposure:</h4>
-<ul>
-{% for c in creds %}
-<li>{{c}}</li>
-{% endfor %}
-</ul>
-{% endif %}
-
-<a href="/">Scan Another</a>
+<a href="/">
+<button>Check Another</button>
+</a>
 
 </div>
+
 </body>
+</html>
+
 </html>
