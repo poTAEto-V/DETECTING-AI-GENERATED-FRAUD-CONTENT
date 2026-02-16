@@ -1,29 +1,38 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import random
 
 app = Flask(__name__)
 
-# Home Page
+# HOME PAGE
 @app.route("/")
 def home():
     return render_template("index.html")
 
 
-# Analyze Page (FORM yaha aayega)
+# ANALYZE ROUTE (FORM SUBMIT)
 @app.route("/analyze", methods=["POST"])
 def analyze():
-    message = request.form["message"]
 
-    # abhi fake result (later AI model)
-    risk = random.randint(10, 95)
+    message = request.form.get("message")
 
-    if risk > 60:
-        result = "⚠️ Fraud Message Detected"
+    # fake AI score (later model laga dena)
+    score = random.randint(10, 100)
+
+    if score >= 70:
+        level = "CRITICAL FRAUD"
+    elif score >= 40:
+        level = "SUSPICIOUS"
     else:
-        result = "✅ Safe Message"
+        level = "SAFE"
 
-    return render_template("result.html", result=result, message=message)
+    return render_template(
+        "result.html",
+        text=message,
+        score=score,
+        level=level
+    )
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
