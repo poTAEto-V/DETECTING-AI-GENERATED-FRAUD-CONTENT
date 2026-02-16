@@ -1,4 +1,4 @@
-frfrom flask import Flask, render_template, request
+from flask import Flask, render_template, request
 import os
 from fraud_detector import analyze_message
 
