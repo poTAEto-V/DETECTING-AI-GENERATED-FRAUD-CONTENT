@@ -1,21 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Result</title>
-<link rel="stylesheet" href="/static/style.css">
+    <title>AI Fraud Detector</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
+
 <div class="card">
-<h2>Analysis Result</h2>
 
-<p><b>Message:</b> {{ message }}</p>
-<p><b>Status:</b> {{ result }}</p>
+    <h1>AI Fraud Detector</h1>
 
-<a href="/">Check Another</a>
+    <form action="/analyze" method="POST">
+
+        <!-- IMPORTANT: name="message" -->
+        <textarea 
+            name="message" 
+            id="msg"
+            placeholder="Paste suspicious message here..."
+            required>
+        </textarea>
+
+        <button type="button" onclick="startVoice()">🎤 Voice</button>
+        <button type="submit">Analyze</button>
+
+    </form>
+
 </div>
+
+<script>
+function startVoice() {
+    if (!('webkitSpeechRecognition' in window)) {
+        alert("Voice recognition not supported");
+        return;
+    }
+
+    const recognition = new webkitSpeechRecognition();
+
+    recognition.onresult = function(event){
+        document.getElementById("msg").value =
+            event.results[0][0].transcript;
+    };
+
+    recognition.start();
+}
+</script>
+
 </body>
 </html>
 
-</html>
 
