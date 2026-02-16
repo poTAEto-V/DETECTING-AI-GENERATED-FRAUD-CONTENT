@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Fraud Detector</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="card">
+<h1>AI Fraud Detector</h1>
+
+<form action="/analyze" method="POST">
+<textarea name="message" id="msg" placeholder="Paste suspicious message..."></textarea>
+
+<button type="button" onclick="startVoice()">🎤 Voice</button>
+<button type="submit">Analyze</button>
+</form>
+</div>
+
+<script>
+function startVoice(){
+  const recognition = new webkitSpeechRecognition();
+  recognition.onresult = function(event){
+    document.getElementById("msg").value = event.results[0][0].transcript;
+  }
+  recognition.start();
+}
+</script>
+
+</body>
+</html>
