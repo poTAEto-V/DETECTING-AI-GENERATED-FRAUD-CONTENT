@@ -2,8 +2,11 @@
 <html>
 <head>
 <title>AI Fraud Detector</title>
-<link rel="stylesheet" href="/static/style.css">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
+
 <body>
 
 <div class="card">
@@ -27,5 +30,8 @@ function startVoice(){
 }
 </script>
 
+<script src="{{ url_for('static', filename='history.js') }}"></script>
+
 </body>
 </html>
+
