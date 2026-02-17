@@ -16,17 +16,7 @@ def analyze():
     if not message:
         return render_template("index.html")
 
-    result = analyze_message(message)
-
-    # SAFE unpack (works even if counts change)
-    score = result[0]
-    level = result[1]
-    reasons = result[2]
-    words = result[3]
-    ai_prob = result[4]
-    creds = result[5]
-    urls = result[6]
-    explanation = result[7] if len(result) > 7 else ""
+    score, level, reasons, words, ai_prob, creds, urls, explanation = analyze_message(message)
 
     return render_template(
         "result.html",
@@ -44,6 +34,7 @@ def analyze():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+)
 
 
 
