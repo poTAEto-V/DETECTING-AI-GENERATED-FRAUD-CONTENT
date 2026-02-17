@@ -4,14 +4,10 @@ import os
 
 app = Flask(__name__)
 
-
-# HOME PAGE
 @app.route("/")
 def home():
     return render_template("index.html")
 
-
-# ANALYZE MESSAGE
 @app.route("/analyze", methods=["POST"])
 def analyze():
 
@@ -20,7 +16,7 @@ def analyze():
     if not message:
         return render_template("index.html")
 
-    score, level, reasons, words, ai_prob, creds, urls = analyze_message(message)
+    score, level, reasons, words, ai_prob, creds, urls, explanation = analyze_message(message)
 
     return render_template(
         "result.html",
@@ -31,14 +27,14 @@ def analyze():
         words=words,
         ai_prob=ai_prob,
         creds=creds,
-        urls=urls
+        urls=urls,
+        explanation=explanation
     )
 
-
-# RENDER PORT
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, debug=True)
+
 
 
 
