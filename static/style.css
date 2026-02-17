@@ -1,57 +1,98 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
 body{
-background:#0f172a;
-font-family:Arial;
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    color:white;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
 }
 
 .card{
-background:#1e293b;
-padding:30px;
-border-radius:15px;
-width:400px;
-box-shadow:0 0 20px rgba(0,0,0,0.5);
+    background:#1f2a44;
+    padding:30px;
+    border-radius:14px;
+    width:100%;
+    max-width:720px;
+    box-shadow:0 10px 35px rgba(0,0,0,0.4);
+}
+
+h2{margin-bottom:15px;}
+
+h3{
+    margin-top:25px;
+    margin-bottom:10px;
+    color:#e2e8f0;
+}
+
+p{
+    margin:8px 0;
+    line-height:1.5;
+    color:#cbd5e1;
 }
 
 textarea{
-width:100%;
-height:120px;
-border-radius:10px;
-padding:10px;
-margin-bottom:10px;
+    width:100%;
+    height:130px;
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+    resize:vertical;
+    font-size:15px;
+    margin-top:10px;
 }
 
 button{
-padding:10px 15px;
-margin-top:10px;
-border:none;
-border-radius:10px;
-background:#22c55e;
-color:white;
-font-weight:bold;
-cursor:pointer;
+    background:#22c55e;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    margin-top:18px;
+    transition:0.25s;
 }
 
-.meter{
-background:#334155;
-height:20px;
-border-radius:10px;
-overflow:hidden;
-margin:10px 0;
+button:hover{
+    background:#16a34a;
 }
 
-.meter div{
-height:100%;
-background:#ef4444;
+ul{
+    padding-left:20px;
+    margin-top:5px;
 }
+
+li{
+    margin:6px 0;
+    color:#cbd5e1;
+}
+
+hr{
+    border:0;
+    height:1px;
+    background:#334155;
+    margin:18px 0;
+}
+
+/* STATUS COLORS */
+
+.safe{color:#22c55e;font-weight:bold;}
+.medium{color:#facc15;font-weight:bold;}
+.high{color:#fb923c;font-weight:bold;}
+.critical{color:#ef4444;font-weight:bold;font-size:18px;}
+
 /* ===== FRAUD METER ===== */
 
-.meter-box{
-    margin-top:18px;
-}
+.meter-box{margin-top:18px;}
 
 .meter-label{
     margin-bottom:8px;
@@ -65,7 +106,6 @@ background:#ef4444;
     background:#0f172a;
     border-radius:20px;
     overflow:hidden;
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
 }
 
 .meter-fill{
@@ -74,20 +114,8 @@ background:#ef4444;
     transition:width 0.6s ease;
 }
 
-/* COLORS */
+.safe-fill{background:linear-gradient(90deg,#22c55e,#4ade80);}
+.medium-fill{background:linear-gradient(90deg,#facc15,#fde047);}
+.high-fill{background:linear-gradient(90deg,#fb923c,#fdba74);}
+.critical-fill{background:linear-gradient(90deg,#ef4444,#f87171);}
 
-.safe-fill{
-    background:linear-gradient(90deg,#22c55e,#4ade80);
-}
-
-.medium-fill{
-    background:linear-gradient(90deg,#facc15,#fde047);
-}
-
-.high-fill{
-    background:linear-gradient(90deg,#fb923c,#fdba74);
-}
-
-.critical-fill{
-    background:linear-gradient(90deg,#ef4444,#f87171);
-}
