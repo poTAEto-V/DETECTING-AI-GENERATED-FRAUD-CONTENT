@@ -1,29 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AI Fraud Detector</title>
-    <link rel="stylesheet" href="/static/style.css">
+<title>AI Fraud Detector</title>
+<link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
 
 <div class="card">
 
-    <h2>AI Message Fraud Detector</h2>
+<h2>AI Message Fraud Detector</h2>
 
-    <form action="/analyze" method="POST">
+<button onclick="startVoice()">🎤 Speak Message</button>
 
-        <label>Paste message to analyze:</label>
+<form action="/analyze" method="POST">
+<textarea name="message" placeholder="Paste SMS / WhatsApp / Email text here..." required></textarea>
+<button type="submit">Analyze Message</button>
+</form>
 
-        <textarea name="message" placeholder="Paste SMS / WhatsApp / Email text here..." required></textarea>
-
-        <button type="submit">Analyze Message</button>
-
-    </form>
+<h3>Previous Checks</h3>
+<ul id="history"></ul>
 
 </div>
 
+<script>
+
+function startVoice(){
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+if(!SR){alert("Voice not supported");return;}
+let r=new SR();
+r.lang="en-IN";
+r.start();
+r.onresult=e=>{
+document.querySelector("textarea").value=e.results[0][0].transcript;
+};
+}
+
+let history=JSON.parse(localStorage.getItem("fraudHistory")||"[]");
+let list=document.getElementById("history");
+
+history.forEach(h=>{
+let li=document.createElement("li");
+li.innerHTML=`<b>${h.level}</b> (${h.score}) : ${(h.text||"").slice(0,40)}...`;
+list.appendChild(li);
+});
+</script>
+
 </body>
 </html>
-
-
