@@ -1,97 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Fraud Result</title>
-    <link rel="stylesheet" href="/static/style.css">
+<title>Fraud Result</title>
+<link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
 
 <div class="card">
 
-    <h2>Fraud Analysis Result</h2>
+<h2>Fraud Analysis Result</h2>
 
-    <p><b>Message:</b></p>
-    <p>{{ message }}</p>
+<p><b>Message:</b> {{message}}</p>
+<hr>
 
-    <hr>
+<p><b>Risk Score:</b> {{score}}</p>
 
-    <p><b>Risk Score:</b> {{ score }}</p>
+<div class="meter">
+<div class="meter-fill
+{% if score>=75 %}critical-fill
+{% elif score>=50 %}high-fill
+{% elif score>=25 %}medium-fill
+{% else %}safe-fill{% endif %}"
+style="width:{{score}}%">
+</div>
+</div>
 
-    <!-- FRAUD METER -->
-    <div class="meter-box">
+<p><b>Status:</b> {{level}}</p>
+<p><b>AI Probability:</b> {{ai_prob}}%</p>
 
-        <div class="meter-label">
-            Fraud Risk Meter: {{ score }}/100
-        </div>
+<h3>Explanation</h3>
+<p>{{explanation}}</p>
 
-        <div class="meter">
-            <div class="meter-fill
-            {% if score >=75 %}critical-fill
-            {% elif score >=50 %}high-fill
-            {% elif score >=25 %}medium-fill
-            {% else %}safe-fill{% endif %}
-            "
-            style="width: {{ score }}%;">
-            </div>
-        </div>
+<h3>Reasons</h3>
+<ul>{% for r in reasons %}<li>{{r}}</li>{% endfor %}</ul>
 
-    </div>
+<h3>Credentials</h3>
+<ul>{% for c in creds %}<li>{{c}}</li>{% endfor %}</ul>
 
-    <p><b>Status:</b>
-    <span class="
-    {% if score >=75 %}critical
-    {% elif score >=50 %}high
-    {% elif score >=25 %}medium
-    {% else %}safe{% endif %}
-    ">
-    {{ level }}
-    </span>
-    </p>
+<h3>URL Alerts</h3>
+<ul>{% for u in urls %}<li>{{u}}</li>{% endfor %}</ul>
 
-    <p><b>AI Probability:</b> {{ ai_prob }}%</p>
-
-    <h3>AI Explanation</h3>
-    <p>{{ explanation }}</p>
-
-    <h3>Reasons Detected</h3>
-    <ul>
-        {% for r in reasons %}
-            <li>{{ r }}</li>
-        {% endfor %}
-    </ul>
-
-    <h3>Suspicious Words</h3>
-    <ul>
-        {% for w in words %}
-            <li>{{ w }}</li>
-        {% endfor %}
-    </ul>
-
-    <h3>Credentials Found</h3>
-    <ul>
-        {% for c in creds %}
-            <li>{{ c }}</li>
-        {% endfor %}
-    </ul>
-
-    <h3>URL Alerts</h3>
-    <ul>
-        {% for u in urls %}
-            <li>{{ u }}</li>
-        {% endfor %}
-    </ul>
-
-    <br><br>
-
-    <a href="/">
-        <button>⬅ Analyze Another Message</button>
-    </a>
+<button onclick="sendEmail()">Email Report</button>
+<a href="/"><button>Back</button></a>
 
 </div>
 
+<script>
+
+let entry={
+text:`{{message}}`.trim(),
+score:Number("{{score}}"),
+level:`{{level}}`
+};
+
+let history=JSON.parse(localStorage.getItem("fraudHistory")||"[]");
+history=history.filter(h=>h.text!==entry.text);
+history.unshift(entry);
+history=history.slice(0,8);
+localStorage.setItem("fraudHistory",JSON.stringify(history));
+
+function sendEmail(){
+
+let body=`Message: {{message}}
+
+Risk Score: {{score}}
+Status: {{level}}
+
+{{explanation}}`;
+
+window.location.href=`mailto:?subject=Fraud Report&body=${encodeURIComponent(body)}`;
+}
+
+</script>
+
 </body>
 </html>
-
-
-
