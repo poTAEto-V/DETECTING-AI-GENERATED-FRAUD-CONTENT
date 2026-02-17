@@ -4,12 +4,10 @@ import os
 
 app = Flask(__name__)
 
-# HOME
 @app.route("/")
 def home():
     return render_template("index.html")
 
-# ANALYZE
 @app.route("/analyze", methods=["POST"])
 def analyze():
 
@@ -18,8 +16,17 @@ def analyze():
     if not message:
         return render_template("index.html")
 
-    # MUST MATCH fraud_detector return count
-    score, level, reasons, words, ai_prob, creds, urls, explanation = analyze_message(message)
+    result = analyze_message(message)
+
+    # SAFE unpack (works even if counts change)
+    score = result[0]
+    level = result[1]
+    reasons = result[2]
+    words = result[3]
+    ai_prob = result[4]
+    creds = result[5]
+    urls = result[6]
+    explanation = result[7] if len(result) > 7 else ""
 
     return render_template(
         "result.html",
@@ -34,10 +41,10 @@ def analyze():
         explanation=explanation
     )
 
-# RUN (DEPLOY SAFE)
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))  # Render/Railway use this
+    port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+
 
 
 
