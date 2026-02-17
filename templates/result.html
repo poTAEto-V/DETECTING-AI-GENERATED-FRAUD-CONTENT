@@ -17,8 +17,22 @@
     <hr>
 
     <p><b>Risk Score:</b> {{ score }}</p>
-    <p><b>Status:</b> {{ level }}</p>
+
+    <p><b>Status:</b>
+    <span class="
+    {% if score >=75 %}critical
+    {% elif score >=50 %}high
+    {% elif score >=25 %}medium
+    {% else %}safe{% endif %}
+    ">
+    {{ level }}
+    </span>
+    </p>
+
     <p><b>AI Probability:</b> {{ ai_prob }}%</p>
+
+    <h3>AI Explanation</h3>
+    <p>{{ explanation }}</p>
 
     <h3>Reasons Detected</h3>
     <ul>
@@ -58,4 +72,5 @@
 
 </body>
 </html>
+
 
