@@ -17,25 +17,26 @@
     <hr>
 
     <p><b>Risk Score:</b> {{ score }}</p>
-     <!-- FRAUD METER -->
-<div class="meter-box">
 
-    <div class="meter-label">
-        Fraud Risk Meter: {{ score }}/100
-    </div>
+    <!-- FRAUD METER -->
+    <div class="meter-box">
 
-    <div class="meter">
-        <div class="meter-fill
-        {% if score >=75 %}critical-fill
-        {% elif score >=50 %}high-fill
-        {% elif score >=25 %}medium-fill
-        {% else %}safe-fill{% endif %}
-        "
-        style="width: {{ score }}%;">
+        <div class="meter-label">
+            Fraud Risk Meter: {{ score }}/100
         </div>
-    </div>
 
-</div>
+        <div class="meter">
+            <div class="meter-fill
+            {% if score >=75 %}critical-fill
+            {% elif score >=50 %}high-fill
+            {% elif score >=25 %}medium-fill
+            {% else %}safe-fill{% endif %}
+            "
+            style="width: {{ score }}%;">
+            </div>
+        </div>
+
+    </div>
 
     <p><b>Status:</b>
     <span class="
@@ -91,5 +92,6 @@
 
 </body>
 </html>
+
 
 
